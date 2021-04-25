@@ -1,34 +1,5 @@
 Skip to content
-Search or jump to…
 
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@emreaksel 
-emreaksel
-/
-fluid_animation
-1
-00
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-fluid_animation/index.html
-@emreaksel
-emreaksel Add files via upload
-Latest commit 14862ed 38 minutes ago
- History
- 1 contributor
-224 lines (192 sloc)  6.61 KB
-  
 <!DOCTYPE html>
 <html>
     <head>
