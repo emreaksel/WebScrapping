@@ -1,37 +1,268 @@
-## Welcome to GitHub Pages
+Skip to content
+Search or jump to…
 
-You can use the [editor on GitHub](https://github.com/emreaksel/fluid_animation/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@emreaksel 
+emreaksel
+/
+fluid_animation
+1
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+fluid_animation/index.html
+@emreaksel
+emreaksel Add files via upload
+Latest commit 14862ed 38 minutes ago
+ History
+ 1 contributor
+224 lines (192 sloc)  6.61 KB
+  
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Cache-Control" content="no-cache">
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
 
-### Markdown
+        <link rel="apple-touch-icon" href="logo.png">
+        <link rel="icon" href="logo.png">
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+        <title>WebGL Fluid Simulation</title>
+        <meta name="description" content="A WebGL fluid simulation that works in mobile browsers.">
 
-```markdown
-Syntax highlighted code block
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Webgl Fluid Simulation">
+        <meta property="og:description" content="A WebGL fluid simulation that works in mobile browsers.">
+        <meta property="og:url" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/">
+        <meta property="og:image" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/logo.png">
 
-# Header 1
-## Header 2
-### Header 3
+        <script type="text/javascript" src="dat.gui.min.js"></script>
+        <style>
+            @font-face {
+                font-family: 'iconfont';
+                src: url('iconfont.ttf') format('truetype');
+            }
 
-- Bulleted
-- List
+            * {
+                user-select: none;
+            }
 
-1. Numbered
-2. List
+            html, body {
+                overflow: hidden;
+                background-color: #000;
+            }
 
-**Bold** and _Italic_ and `Code` text
+            body {
+                margin: 0;
+                position: fixed;
+                width: 100%;
+                height: 100%;
+            }
 
-[Link](url) and ![Image](src)
-```
+            canvas {
+                width: 100%;
+                height: 100%;
+            }
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+            .dg {
+                opacity: 0.9;
+            }
 
-### Jekyll Themes
+            .dg .property-name {
+                overflow: visible;
+            }
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/emreaksel/fluid_animation/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+            .bigFont {
+                font-size: 150%;
+                color: #8C8C8C;
+            }
 
-### Support or Contact
+            .cr.function.appBigFont {
+                font-size: 150%;
+                line-height: 27px;
+                color: #A5F8D3;
+                background-color: #023C40;
+            }
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+            .cr.function.appBigFont .property-name {
+                float: none;
+            }
+
+            .cr.function.appBigFont .icon {
+                position: sticky;
+                bottom: 27px;
+            }
+
+            .icon {
+                font-family: 'iconfont';
+                font-size: 130%;
+                float: right;
+            }
+
+            .twitter:before {
+                content: 'a';
+            }
+
+            .github:before {
+                content: 'b';
+            }
+
+            .app:before {
+                content: 'c';
+            }
+
+            .discord:before {
+                content: 'd';
+            }
+
+            .promo {
+                display: none;
+                /* display: table; */
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0%;
+                height: 0%;
+                z-index: -999;
+                overflow: auto;
+                color: lightblue;
+                background-color: rgba(0,0,0,0.4);
+                animation: promo-appear-animation 0.35s ease-out;
+            }
+
+            .promo-middle {
+                display: table-cell;
+                vertical-align: middle;
+            }
+
+            .promo-content {
+                width: 80vw;
+                height: 80vh;
+                max-width: 80vh;
+                max-height: 80vw;
+                margin: auto;
+                padding: 0;
+                font-size: 2.8vmax;
+                font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+                text-align: center;
+                background-image: url("promo_back.png");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                border-radius: 15px;
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            }
+
+            .promo-header {
+                height: 10%;
+                padding: 2px 16px;
+            }
+
+            .promo-close {
+                width: 10%;
+                height: 100%;
+                text-align: left;
+                float: left;
+                font-size: 1.3em;
+                /* transition: 0.2s; */
+            }
+
+            .promo-close:hover {
+                /* transform: scale(1.25); */
+                cursor: pointer;
+            }
+
+            .promo-body {
+                padding: 8px 16px 16px 16px;
+                margin: auto;
+            }
+
+            .promo-body p {
+                margin-top: 0;
+                mix-blend-mode: color-dodge;
+            }
+
+            .link {
+                width: 100%;
+                display: inline-block;
+            }
+
+            .link img {
+                width: 100%;
+            }
+
+            @keyframes promo-appear-animation {
+                0% {
+                    transform: scale(2.0);
+                    opacity: 0;
+                }
+                100% {
+                    transform: scale(1.0);
+                    opacity: 1;
+                }
+            }
+        </style>
+        <script>
+            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+            ga('create', 'UA-105392568-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+        <script async src="https://www.google-analytics.com/analytics.js"></script>
+    </head>
+    <body>
+        <canvas></canvas>
+https://godofdevelopers.com/aero/
+        <!-- Mother of God, pls forgive me -->
+      <div class="promo">
+            <div class="promo-middle">
+                <div class="promo-content">
+                    <div class="promo-header">
+                        <span class="promo-close">&times;</span>
+                    </div>
+                    <div class="promo-body">
+                        <p>Try Fluid Simulation app!</p>
+                        <div class="links-container">
+                            <a class="link" id="apple_link" target="_blank">
+                                <img class="link-img" alt="Download on the App Store" src="app_badge.png"/>
+                            </a>
+                            <a class="link" id="google_link" target="_blank">
+                                <img class="link-img" alt="Get it on Google Play" src="gp_badge.png"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="./script.js"></script>
+    </body>
+</html>
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
