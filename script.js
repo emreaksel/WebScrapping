@@ -6,13 +6,6 @@ https://stackoverflow.com/questions/42518419/html-text-scraping#answer-42528035
 // url to scrape
 const urlToScrape = "https://unsplash.com/";
 
-// workaround for cross origin requests
-$.ajaxPrefilter(function(options) {
-  if (options.crossDomain && jQuery.support.cors) {
-    const http = window.location.protocol === "http:" ? "http:" : "https:";
-    options.url = http + "//cors-anywhere.herokuapp.com/" + options.url;
-  }
-});
 
 // get request
 $.ajax({
