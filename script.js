@@ -4,7 +4,7 @@ https://stackoverflow.com/questions/42518419/html-text-scraping#answer-42528035
 */
 
 // url to scrape
-const urlToScrape = "https://unsplash.com/";
+const urlToScrape = "https://github.com/";
 
 
 // get request
